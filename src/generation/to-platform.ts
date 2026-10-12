@@ -13,6 +13,7 @@ const MAP: Record<string, Mapper> = {
   "kling-3-4k": (plane) => mapKling3(plane, "kling-video/v3.0/4k"),
   "kling-3-motion-std": (plane) => mapKlingMotion(plane, "kling-video/v3/motion-control/std"),
   "kling-3-motion-pro": (plane) => mapKlingMotion(plane, "kling-video/v3/motion-control/pro"),
+  "genjutsu-motion-transfer": mapGenjutsu,
   "seedance-2": (plane) => mapSeedance(plane, "bytedance/seedance-2.0"),
   "seedance-2-fast": (plane) => mapSeedance(plane, "bytedance/seedance-2.0/fast"),
   "seedance-2-mini": (plane) => mapSeedance(plane, "bytedance/seedance-2.0/mini"),
@@ -90,6 +91,18 @@ function mapKlingMotion(plane: GenerationPlane, path: string): Mapped {
       ...(video ? { video_url: video } : {}),
       keep_original_sound: plane.settings.keepOriginalSound ? "yes" : "no",
       character_orientation: plane.settings.characterOrientation,
+    },
+  };
+}
+
+function mapGenjutsu(plane: GenerationPlane): Mapped {
+  return {
+    path: "higgsfield/genjutsu/motion-transfer/v1.0",
+    body: {
+      prompt: plane.prompt.text,
+      video_url: urls(plane, "video")[0],
+      image_urls: urls(plane, "reference"),
+      resolution: plane.settings.resolution,
     },
   };
 }
