@@ -14,6 +14,7 @@ const MAP: Record<string, Mapper> = {
   "kling-3-motion-std": (plane) => mapKlingMotion(plane, "kling-video/v3/motion-control/std"),
   "kling-3-motion-pro": (plane) => mapKlingMotion(plane, "kling-video/v3/motion-control/pro"),
   "genjutsu-motion-transfer": mapGenjutsu,
+  "wan-3-reference": mapWanReference,
   "seedance-2": (plane) => mapSeedance(plane, "bytedance/seedance-2.0"),
   "seedance-2-fast": (plane) => mapSeedance(plane, "bytedance/seedance-2.0/fast"),
   "seedance-2-mini": (plane) => mapSeedance(plane, "bytedance/seedance-2.0/mini"),
@@ -103,6 +104,25 @@ function mapGenjutsu(plane: GenerationPlane): Mapped {
       video_url: urls(plane, "video")[0],
       image_urls: urls(plane, "reference"),
       resolution: plane.settings.resolution,
+    },
+  };
+}
+
+function mapWanReference(plane: GenerationPlane): Mapped {
+  const refs = urls(plane, "reference");
+  const videos = urls(plane, "video");
+  const audios = urls(plane, "audio");
+  return {
+    path: "alibaba/wan-3.0/reference-to-video",
+    body: {
+      prompt: plane.prompt.text,
+      duration: plane.settings.duration,
+      resolution: plane.settings.resolution,
+      aspect_ratio: plane.settings.aspectRatio,
+      generate_audio: plane.settings.generateAudio,
+      ...(refs.length ? { image_urls: refs } : {}),
+      ...(videos.length ? { video_urls: videos } : {}),
+      ...(audios.length ? { audio_urls: audios } : {}),
     },
   };
 }

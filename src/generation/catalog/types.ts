@@ -25,7 +25,7 @@ export type ModelEntry = {
   label: string;
   roles: Partial<Record<MediaRole, number>>;
   settings: Record<string, SettingField>;
-  /** Submit paths when the shared mapper is enough. Soul, Kling 3, Seedance, and Genjutsu keep custom maps. */
+  /** Submit paths when the shared mapper is enough. Soul, Kling 3, Seedance, Genjutsu, and Wan Reference keep custom maps. */
   paths?: PlatformPaths;
 };
 

@@ -35,6 +35,7 @@ import { wan26 } from "./wan-2.6";
 import { wan27 } from "./wan-2.7";
 import { wan3 } from "./wan-3";
 import { wan3Prime } from "./wan-3-prime";
+import { wan3Reference } from "./wan-3-reference";
 import { zImageTurbo } from "./z-image-turbo";
 
 export const MODELS: readonly ModelEntry[] = [
@@ -60,6 +61,7 @@ export const MODELS: readonly ModelEntry[] = [
   qwenImage3,
   zImageTurbo,
   wan3,
+  wan3Reference,
   wan3Prime,
   wan27,
   wan26,
